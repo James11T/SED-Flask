@@ -6,7 +6,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      ENV: test
+      ENV: test # Set the ENV to test so that an "in memory" database is used
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.11
@@ -14,7 +14,6 @@ jobs:
       with:
         python-version: '3.11'
     - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-    - name: Run tests with environment variables
-      run: "PYTHONPATH=$PYTHONPATH:$PWD pytest"
+      run: pip install -r requirements.txt
+    - name: Run tests
+      run: PYTHONPATH=$PYTHONPATH:$PWD pytest # Funky pytest stuff

@@ -6,6 +6,7 @@ create_tables()
 
 app = Flask(__name__)
 
+# Used for flashing messages
 app.config["SECRET_KEY"] = "super secret!"
 
 @app.route("/")
@@ -18,25 +19,31 @@ def index():
 @app.route("/sign-up", methods=["GET", "POST"])
 def sign_up():
     if request.method == "POST":
+        # Form was submitted
         username, password = request.form["username"], request.form["password"]
 
         create_user(username, password)
         flash("Created user")
+
         return redirect(url_for("index"))
-        
+    
+    # Standard GET request, just send the template
     return render_template("sign_up.html")
 
 @app.route("/sign-in", methods=["GET", "POST"])
 def sign_in():
     if request.method == "POST":
+        # Form was submitted
         username, password = request.form["username"], request.form["password"]
 
         is_correct_password = check_password(username, password)
 
         if is_correct_password:
+            # Successful Sign in
             flash(f"Signed in as {username}")
             return redirect(url_for("index"))
         else:
+            # Incorrect username or password
             flash(f"Incorrect username or password")
 
     return render_template("sign_in.html")
