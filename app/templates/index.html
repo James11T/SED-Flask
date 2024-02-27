@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+<div>Hello from the "{{ env }}" environment</div>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Username</th>
+  </tr>
+  {% for user in users %}
+  <tr>
+    <td>{{ user[0] }}</td>
+    <td>{{ user[1] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

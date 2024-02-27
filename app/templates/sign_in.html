@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  label {
+    font-size: 0.8rem;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+<form action="/sign-in" method="post">
+  <legend>Sign In</legend>
+  <label for="username">Username</label>
+  <input type="text" name="username" id="username">
+  <label for="username">Password</label>
+  <input type="text" name="password" id="password">
+  <button type="submit">Sign In</button>
+</form>
+{% endblock %}

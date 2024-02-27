@@ -1,0 +1,20 @@
+name: Test Flask App
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      ENV: test
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Run tests with environment variables
+      run: "PYTHONPATH=$PYTHONPATH:$PWD pytest"
